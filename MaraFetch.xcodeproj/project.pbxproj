@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		4EDAF7842D205057007D800C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4EDAF72B2D15C789007D800C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4EDAF7322D15C789007D800C;
+			remoteInfo = MaraFetch;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		4EDAF7332D15C789007D800C /* MaraFetch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaraFetch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EDAF7802D205057007D800C /* MaraFetchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MaraFetchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +27,22 @@
 			path = MaraFetch;
 			sourceTree = "<group>";
 		};
+		4EDAF7812D205057007D800C /* MaraFetchTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MaraFetchTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		4EDAF7302D15C789007D800C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EDAF77D2D205057007D800C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				4EDAF7352D15C789007D800C /* MaraFetch */,
+				4EDAF7812D205057007D800C /* MaraFetchTests */,
 				4EDAF7342D15C789007D800C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				4EDAF7332D15C789007D800C /* MaraFetch.app */,
+				4EDAF7802D205057007D800C /* MaraFetchTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +95,29 @@
 			productReference = 4EDAF7332D15C789007D800C /* MaraFetch.app */;
 			productType = "com.apple.product-type.application";
 		};
+		4EDAF77F2D205057007D800C /* MaraFetchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4EDAF7862D205057007D800C /* Build configuration list for PBXNativeTarget "MaraFetchTests" */;
+			buildPhases = (
+				4EDAF77C2D205057007D800C /* Sources */,
+				4EDAF77D2D205057007D800C /* Frameworks */,
+				4EDAF77E2D205057007D800C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4EDAF7852D205057007D800C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4EDAF7812D205057007D800C /* MaraFetchTests */,
+			);
+			name = MaraFetchTests;
+			packageProductDependencies = (
+			);
+			productName = MaraFetchTests;
+			productReference = 4EDAF7802D205057007D800C /* MaraFetchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +130,10 @@
 				TargetAttributes = {
 					4EDAF7322D15C789007D800C = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					4EDAF77F2D205057007D800C = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 4EDAF7322D15C789007D800C;
 					};
 				};
 			};
@@ -100,12 +152,20 @@
 			projectRoot = "";
 			targets = (
 				4EDAF7322D15C789007D800C /* MaraFetch */,
+				4EDAF77F2D205057007D800C /* MaraFetchTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4EDAF7312D15C789007D800C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EDAF77E2D205057007D800C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +182,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4EDAF77C2D205057007D800C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4EDAF7852D205057007D800C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4EDAF7322D15C789007D800C /* MaraFetch */;
+			targetProxy = 4EDAF7842D205057007D800C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4EDAF73F2D15C78B007D800C /* Debug */ = {
@@ -302,6 +377,42 @@
 			};
 			name = Release;
 		};
+		4EDAF7872D205057007D800C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 87W96M29JK;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Torres.MaraFetchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MaraFetch.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MaraFetch";
+			};
+			name = Debug;
+		};
+		4EDAF7882D205057007D800C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 87W96M29JK;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Torres.MaraFetchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MaraFetch.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MaraFetch";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -319,6 +430,15 @@
 			buildConfigurations = (
 				4EDAF7422D15C78B007D800C /* Debug */,
 				4EDAF7432D15C78B007D800C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4EDAF7862D205057007D800C /* Build configuration list for PBXNativeTarget "MaraFetchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4EDAF7872D205057007D800C /* Debug */,
+				4EDAF7882D205057007D800C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
