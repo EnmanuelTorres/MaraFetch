@@ -44,3 +44,27 @@ class URLSessionHTTPClient: HTTPClientType {
     
     
 }
+
+
+extension URLSessionHTTPClient: ImageDataServiceType {
+    
+    func requestImage(url: URL) async -> Result<Data, DataError> {
+        do {
+            let result = try await session.data(from: url)
+            
+            guard let response = result.1 as? HTTPURLResponse else {
+                return .failure(.networkError)
+            }
+            
+            guard response.statusCode == 200 else {
+                return .failure(.apiError)
+            }
+            
+            return .success(result.0)
+        } catch {
+            return .failure(.otherError(error))
+        }
+    }
+    
+    
+}

@@ -6,15 +6,20 @@
 //
 
 import Foundation
+import UIKit
 
 
 class MainViewModel: ObservableObject {
     
     @Published var RecipeList: [Recipe] = []
-    private let repository: DessertListRepositoryType
+    @Published var images: [String: UIImage] = [:]
     
-    init(repository: DessertListRepositoryType) {
+    private let repository: DessertListRepositoryType
+    private let imageRepository: ImageRepositoryType
+    
+    init(repository: DessertListRepositoryType, imageRepository: ImageRepositoryType) {
         self.repository = repository
+        self.imageRepository = imageRepository
     }
     
     
@@ -37,5 +42,19 @@ class MainViewModel: ObservableObject {
         }
     }
     
-
+    func fetchImages(for recipe: Recipe) async {
+        let imageUrl = recipe.photoUrl
+        
+        let result = await imageRepository.getImage(url: URL(string: imageUrl))
+        
+        switch result {
+            
+        case .success(let imageData):
+            let image = UIImage(data: imageData)
+            self.images[recipe.photoUrl] = image
+        case .failure(let error):
+            print("Error fetching image: \(error)")
+        }
+        
+    }
 }

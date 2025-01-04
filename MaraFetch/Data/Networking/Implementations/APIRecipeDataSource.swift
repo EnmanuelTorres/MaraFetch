@@ -19,7 +19,11 @@ class APIRecipeDataSource {
 extension APIRecipeDataSource: ApiDatasourceRecipeType {
     func getDessertList() async -> Result<[RecipeDTO], DataError> {
         
+        //  let endPoint = "recipes-empty.json"
         let endPoint = "recipes.json"
+        
+        
+        
         let result = await httpClient.makeRequest(endPoint: endPoint, baseUrl: baseUrl)
         
         guard case .success(let data) = result else {
@@ -28,6 +32,12 @@ extension APIRecipeDataSource: ApiDatasourceRecipeType {
         
         guard let recipesList = try? JSONDecoder().decode(RecipesDTO.self, from: data) else {
             return .failure(.decodingError)
+        }
+        
+        let validRecipeList = recipesList.recipes.compactMap{ $0 }
+        
+        guard !validRecipeList.isEmpty else {
+            return .failure(.emptyData)
         }
         
         return .success(recipesList.recipes.sorted(by: {$0.name < $1.name}))
