@@ -7,18 +7,42 @@
 
 import Foundation
 
-
-class MainFactory {
-//    static func create() -> MainView {
-//        return MainView(viewModel: createRecipeViewModel())
-//    }
-//    
-//    private static  func createRecipeViewModel() -> MainViewModel {
-//        return MainViewModel(repository: any DessertListRepositoryType,
-//                             imageRepository: <#T##any ImageRepositoryType#>)
-//    }
-//    
-//    private static func createDessertListRepository() -> DessertListRepositoryType {
-//        
-//    }
+actor MainFactory {
+    
+   private static let UrlSessionHttpClient = URLSessionHTTPClient(requestMaker: URLSessionRequestMaker())
+    
+    @MainActor
+    static func create() -> MainView {
+        return MainView(viewModel: createRecipeViewModel())
+    }
+    
+    @MainActor
+    private static  func createRecipeViewModel() -> MainViewModel {
+        return MainViewModel(repository: createDessertListRepository(),
+                             imageRepository: createImageRepository())
+    }
+    
+    private static func createImageRepository() -> ImageRepositoryType {
+        return ImageRepository(imageDataService: UrlSessionHttpClient,
+                               imageCache: createImageCache())
+    }
+    
+    private static func createImageCache() -> ImageCacheType {
+        return ImageCache()
+    }
+    
+    private static func createDessertListRepository() -> DessertListRepositoryType {
+        return RecipeListRepository(apiDataSource: createApiDataSource(),
+                                    recipeMapper: RecipeMapper(),
+                                    cacheDataSource: createCacheDataSource())
+    }
+    
+    private static func createCacheDataSource() -> RecipeListCacheType {
+        return RecipeListCache()
+    }
+    
+    private static func createApiDataSource() -> ApiDatasourceRecipeType {
+        return APIRecipeDataSource(httpClient: UrlSessionHttpClient)
+    }
+    
 }

@@ -19,8 +19,9 @@ class APIRecipeDataSource {
 extension APIRecipeDataSource: ApiDatasourceRecipeType {
     func getDessertList() async -> Result<[RecipeDTO], DataError> {
         
-        //  let endPoint = "recipes-empty.json"
+        //let endPoint = "recipes-empty.json"
         let endPoint = "recipes.json"
+        // let endPoint = "recipes-malformed.json"
         
         
         
@@ -40,7 +41,7 @@ extension APIRecipeDataSource: ApiDatasourceRecipeType {
             return .failure(.emptyData)
         }
         
-        return .success(recipesList.recipes.sorted(by: {$0.name < $1.name}))
+        return .success(validRecipeList.sorted(by: {$0.name < $1.name}))
     }
     
     

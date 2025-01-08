@@ -67,6 +67,6 @@ let recipesMock = [
 ]
 
 
-let mainViewModelMock = MainViewModel(repository: RecipeListRepository(apiDataSource: APIRecipeDataSource(httpClient: urlSessionHttpclient), recipeMapper: RecipeMapper(), cacheDataSource: RecipeListCache()), imageRepository: ImageRepository(imageDataService: urlSessionHttpclient, imageCache: ImageCache()))
+@MainActor let mainViewModelMock = MainViewModel(repository: RecipeListRepository(apiDataSource: APIRecipeDataSource(httpClient: urlSessionHttpClient), recipeMapper: RecipeMapper(), cacheDataSource: RecipeListCache()), imageRepository: ImageRepository(imageDataService: urlSessionHttpClient, imageCache: ImageCache()))
 
-let urlSessionHttpclient = URLSessionHTTPClient(requestMaker: URLSessionRequestMaker())
+@MainActor let urlSessionHttpClient = URLSessionHTTPClient(requestMaker: URLSessionRequestMaker())

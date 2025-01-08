@@ -18,6 +18,7 @@ class URLSessionHTTPClient: HTTPClientType {
         self.requestMaker = requestMaker
     }
     
+    
     func makeRequest(endPoint: String, baseUrl: String) async -> Result<Data, DataError> {
         guard let url = requestMaker.url(endPoint: endPoint, baseUrl: baseUrl) else {
             return .failure(.URLError)

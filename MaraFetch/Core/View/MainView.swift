@@ -11,9 +11,12 @@ struct MainView: View {
     
     @ObservedObject private var viewModel: MainViewModel
     
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    
     var result: [Recipe] {
         viewModel.RecipeList
-      //  recipesMock
+        //  recipesMock
     }
     
     init(viewModel: MainViewModel) {
@@ -23,7 +26,7 @@ struct MainView: View {
     var body: some View {
         NavigationView{
             List(result) { recipe in
-                RowView(recipe: recipe)
+                RowView(viewModel: viewModel, recipe: recipe)
             }
             .navigationTitle("Recipes")
         }
@@ -34,6 +37,22 @@ struct MainView: View {
         }
         .refreshable {
             await viewModel.getRecipeList()
+        }
+        .alert("Error", isPresented: $showAlert) {
+            Button("Accept", role: .cancel) {
+                viewModel.errorMessage = nil
+            }
+        } message: {
+            if let error = viewModel.errorMessage {
+                Text(error)
+            } else {
+                Text("An unknown error occurred.")
+            }
+        }
+        .onChange(of: viewModel.errorMessage) { oldValue, newValue in
+            if newValue != nil {
+                showAlert = true
+            }
         }
     }
 }

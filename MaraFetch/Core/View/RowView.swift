@@ -8,23 +8,27 @@
 import SwiftUI
 
 struct RowView: View {
+    
+    @ObservedObject var viewModel: MainViewModel
+    
     var recipe: Recipe
-
+    
     var body: some View {
         HStack(alignment: .top, spacing: 16) {
             
-            AsyncImage(url: URL(string: recipe.photoUrl)) { image in
-                image
+            if let image = viewModel.images[recipe.photoUrl] {
+                
+                Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 60, height: 60)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
-            } placeholder: {
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(width: 60, height: 60)
+                
+            } else {
+                ProgressView()
+                
             }
-
+            
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(recipe.name)
@@ -35,13 +39,21 @@ struct RowView: View {
                     .foregroundColor(.secondary)
             }
         }
+        
         .padding(.vertical, 8)
+        .onAppear{
+            Task {
+                await viewModel.fetchImages(for: recipe)
+            }
+        }
+        
     }
 }
 
 
 
 #Preview {
-    RowView(recipe: recipeMock)
+    RowView(viewModel: mainViewModelMock,
+            recipe: recipeMock)
 }
 

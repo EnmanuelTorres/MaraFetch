@@ -9,10 +9,12 @@ import Foundation
 import UIKit
 
 
+@MainActor
 class MainViewModel: ObservableObject {
     
     @Published var RecipeList: [Recipe] = []
     @Published var images: [String: UIImage] = [:]
+    @Published var errorMessage: String? = nil
     
     private let repository: DessertListRepositoryType
     private let imageRepository: ImageRepositoryType
@@ -24,21 +26,28 @@ class MainViewModel: ObservableObject {
     
     
     func getRecipeList() async {
-        Task { @MainActor in
-            let result = await repository.getRecipeList()
-            
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let recipeList):
-                    Task { @MainActor in
-                        self.RecipeList = recipeList
-                    }
-                    
-                case .failure(let error):
-                    print("Error fetching desserts: \(error.localizedDescription)")
-                    
-                }
+        
+        let result = await repository.getRecipeList()
+        
+        
+        switch result {
+        case .success(let recipeList):
+            Task { @MainActor in
+                self.RecipeList = recipeList
             }
+            
+        case .failure(let error):
+            
+            switch error {
+            case .emptyData:
+                self.errorMessage = "\(error.localizedDescription)"
+                
+            case .decodingError:
+                self.errorMessage = "\(error.localizedDescription)"
+            default:
+                print("Error fetching recipes: \(error.localizedDescription)")
+            }
+            
         }
     }
     

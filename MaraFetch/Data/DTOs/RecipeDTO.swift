@@ -9,7 +9,11 @@ import Foundation
 
 
 struct RecipesDTO: Codable{
-    let recipes: [RecipeDTO]
+    let recipes: [RecipeDTO?]
+    
+    enum CodingKeys: String, CodingKey {
+        case recipes
+    }
     
 }
 
@@ -19,8 +23,8 @@ struct RecipeDTO: Codable, Hashable {
     let photoUrlLarge: String
     let photoUrlSmall: String
     let uuid: String
-    let sourceUrl: String
-    let youTubeUrl: String
+    let sourceUrl: String?
+    let youTubeUrl: String?
 
     enum CodingKeys: String, CodingKey {
         case cuisine
